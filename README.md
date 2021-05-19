@@ -12,3 +12,5 @@ see the VS project debug arguments. for each DLL there's a separate debug profil
 
 # Known Limitations:
 read info.txt
+
+Rohitab Api Monitor XML generation is not complete and only the function XML is generated. no output yet
