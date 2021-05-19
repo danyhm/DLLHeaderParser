@@ -1,0 +1,39 @@
+{
+  "profiles": {
+    "DLLHeaderParser": {
+      "commandName": "Project"
+    },
+    "test_avcodec": {
+      "commandName": "Project",
+      "commandLineArgs": "-D\"__GNUC__=9\" \"__GNUC_MINOR__=3\" \"__STDC_CONSTANT_MACROS\" -i\"./sample/include\" --dll=\"./sample/bin/avcodec-58.dll\" -s\"./sample/Compiler_include\" --filesEx=\"./sample/include/libavcodec\\videotoolbox.h\" \"./sample/include/libavcodec\\xvmc.h\" \"./sample/include/libavcodec\\qsv.h\" \"./sample/include/libavcodec\\vdpau.h\" --folders=\"./sample/include/libavcodec\" --winapioverride --verbose --cpp=true --log=log.txt"
+    },
+    "test_avdevice": {
+      "commandName": "Project",
+      "commandLineArgs": "-D\"__GNUC__=9\" \"__GNUC_MINOR__=3\" \"__STDC_CONSTANT_MACROS\" -i\"./sample/include\" --dll=\"./sample/bin/avdevice-58.dll\" -s\"./sample/Compiler_include\" --folders=\"./sample/include/libavdevice\" --winapioverride --verbose --cpp=true --log=log.txt"
+    },
+    "test_avfilter": {
+      "commandName": "Project",
+      "commandLineArgs": "-D\"__GNUC__=9\" \"__GNUC_MINOR__=3\" \"__STDC_CONSTANT_MACROS\" -i\"./sample/include\" --dll=\"./sample/bin/avfilter-7.dll\" -s\"./sample/Compiler_include\" --folders=\"./sample/include/libavfilter\" --winapioverride --verbose --cpp=true --log=log.txt"
+    },
+    "test_avformat": {
+      "commandName": "Project",
+      "commandLineArgs": "-D\"__GNUC__=9\" \"__GNUC_MINOR__=3\" \"__STDC_CONSTANT_MACROS\" -i\"./sample/include\" --dll=\"./sample/bin/avformat-58.dll\" -s\"./sample/Compiler_include\" --folders=\"./sample/include/libavformat\" --winapioverride --verbose --cpp=true --log=log.txt"
+    },
+    "test_avutil": {
+      "commandName": "Project",
+      "commandLineArgs": "-D\"__GNUC__=9\" \"__GNUC_MINOR__=3\" \"__STDC_CONSTANT_MACROS\" \"__STDC_FORMAT_MACROS\" -i\"./sample/include\" --dll=\"./sample/bin/avutil-56.dll\" -s\"./sample/Compiler_include\" --folders=\"./sample/include/libavutil\" --filesEx=\"./sample/include/libavutil\\hwcontext_cuda.h\" \"./sample/include/libavutil\\hwcontext_opencl.h\" \"./sample/include/libavutil\\hwcontext_qsv.h\" \"./sample/include/libavutil\\hwcontext_vaapi.h\" \"./sample/include/libavutil\\hwcontext_vdpau.h\" \"./sample/include/libavutil\\hwcontext_videotoolbox.h\" \"./sample/include/libavutil\\hwcontext_vulkan.h\" --winapioverride --verbose --cpp=true"
+    },
+    "test_postproc": {
+      "commandName": "Project",
+      "commandLineArgs": "-D\"__GNUC__=9\" \"__GNUC_MINOR__=3\" \"__STDC_CONSTANT_MACROS\" -i\"./sample/include\" --dll=\"./sample/bin/postproc-55.dll\" -s\"./sample/Compiler_include\" --folders=\"./sample/include/libpostproc\" --winapioverride --verbose --cpp=true"
+    },
+    "test_swresample": {
+      "commandName": "Project",
+      "commandLineArgs": "-D\"__GNUC__=9\" \"__GNUC_MINOR__=3\" \"__STDC_CONSTANT_MACROS\" -i\"./sample/include\" --dll=\"./sample/bin/swresample-3.dll\" -s\"./sample/Compiler_include\" --folders=\"./sample/include/libswresample\" --winapioverride --verbose --cpp=true"
+    },
+    "test_swscale": {
+      "commandName": "Project",
+      "commandLineArgs": "-D\"__GNUC__=9\" \"__GNUC_MINOR__=3\" \"__STDC_CONSTANT_MACROS\" -i\"./sample/include\" --dll=\"./sample/bin/swscale-5.dll\" -s\"./sample/Compiler_include\" --folders=\"./sample/include/libswscale\" --winapioverride --verbose --cpp=true"
+    }
+  }
+}

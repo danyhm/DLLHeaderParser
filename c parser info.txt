@@ -1,0 +1,11 @@
+C AST
+
+https://stackoverflow.com/questions/10300021/parsing-reading-c-header-files-using-java/27496664
+
+https://github.com/eliben/pycparser
+https://www.antlr.org/
+
+https://github.com/ricardojlrufino/cplus-libparser
+https://github.com/microsoft/ClangSharp
+https://github.com/foonathan/cppast
+https://github.com/xoofx/CppAst.NET/

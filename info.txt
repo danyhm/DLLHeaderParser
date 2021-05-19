@@ -1,0 +1,43 @@
+﻿notes:
+1- the following must be added to the .csproj file manually
+
+<PropertyGroup>
+    <!-- Workaround for issue https://github.com/microsoft/ClangSharp/issues/129 -->
+    <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == '' AND '$(PackAsTool)' != 'true'">$(NETCoreSdkRuntimeIdentifier)</RuntimeIdentifier>
+    <AssemblyName>parser_test</AssemblyName>
+    <RootNamespace>parster_test</RootNamespace>
+  </PropertyGroup>
+
+2- The IncludedFolder and SystemIncludeFolder are different. SystemInclude is the compiler Include folder and Includefolder
+is the application Include folder for the header files.
+
+3- the compiler header files SHOULD NOT be changed ! In case of error in the parser the correct "Defines"
+should be passed to the parser to resolve the errors.
+example for MingW64 (gcc 9.3) the following should be added:
+    3.1 in case of using a "compiled/ready to use" compiler add the following:
+    Defines.Add("__GNUC__=9");
+    Defines.Add("__GNUC_MINOR__=3");
+    3.2 in case of using the compiler source only. the above must be added plus the following:
+    Defines.Add("_UCRT");
+    in addition to that some files in the compiler include folder that have the .h.in extention must be modified
+    accordingly and their extention changed to .h
+
+4- it's better to try a very simple example first to see the compiler options are specified correctly and then
+    move on to the main files if no other error is given.
+    example for MingW64 : the following should be added for the parser to work correctly
+    Defines.Add("__STDC_CONSTANT_MACROS");
+
+4.1- the libclang is not bug free , sometimes it fails to process the files or include files correctly.
+    in our case in the compiler file time.h in line 122-125 the __MINGW_IMPORT is not detected so we have to comment it out 
+     like /*__MINGW_IMPORT*/ 
+
+5- add following to export all dlls to output
+<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+
+6- due to natuer of CppAst (don't know about libclang itself) parsing structs is not possible as is because they can contains nested 
+enums or structs (that are not typedefed, only scoped to the struct itself) and CppAst can't tell the nested struct/enum position.
+because of this , only a warning is generate for the user to manually inspect that type.
+
+7- CppAst cannot configure the compilation as C (only c++ seems to be supported). so caution must be taken for the header files
+if there are conditions or statements dealing with __cplusplus as it's defined by default when parsing as C++
+

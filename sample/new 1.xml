@@ -1,0 +1,115 @@
+<!--
+    API Monitor Definitions
+    (c) 2010-2013, Rohitab Batra <rohitab@rohitab.com>
+    http://www.rohitab.com/apimonitor/
+	
+	
+	https://github.com/semuel/api_monitor_apis
+-->
+<ApiMonitor>
+	<!-- 
+		Each ApiMonitor can contain multiple Include blocks
+		the content of the Header from that file will be included automatically
+		<Include Filename="Headers\windows.h.xml" />
+	-->
+    <Include Filename="Headers\windows.h.xml" />
+	<!-- 
+		Each ApiMonitor can contain one Header block
+		the content of this header will be included in this file and other files including this file.
+		<Headers>
+		</Headers>
+		it's the best place to put variables
+	-->
+    <!-- 
+		Each ApiMonitor can contain multiple module blocks
+		each module represents a DLL file
+		each module can contain api and variable blocks
+		<Module Name="xinput1_1.dll" CallingConvention="STDCALL" ErrorFunc="GetLastError" OnlineHelp="MSDN">
+		</Module>
+		<ModuleAlias Name="msvcr70.dll" />
+		If a module re-export APIs of different DLL, use the SourceModule block.
+
+		<SourceModule Name="Advapi32.dll" Include="Windows\Advapi32.xml">
+			<Api Name="RegCloseKey" />
+			.....
+		</SourceModule>
+
+	-->
+	<!-- 
+	<Api Name="XInputEnable">
+		<Param Type="BOOL" Name="enable" />
+		<Return Type="void" />
+	</Api>
+
+	Attributes:
+
+    Name: Function name.
+    Ordinal: The ordinal number of the function. Some application load by ordinal instead of by name.
+    BothCharset: set to "True" if this API have both A(Ascii) and W(Wide Char) versions.
+    If BothCharset is true, instead of Ordinal you should specify OrdinalA and OrdinalW
+	
+	Sub tags:
+
+    Param: function parameter. see section below.
+    Return: The return type. (can be an Enum)
+    Success: determain if the call was success or not. see section below.
+	
+	Function Parameters:
+    Type: Data type of the parameter
+    Name: How it is called
+    Count: For arrays / pointers, how many of this type the array contain
+    DerefCount:
+    PostCount: Same as Count, but only valid post call. (for out arrays)
+    DerefPostCount:
+    Display:
+    PostLength:
+
+	API Success condition:
+	API call can also have a success indicator. such as:
+	Parameters:
+
+    Return can be: "NotEqual", "Greater", "Equal",
+    Value: Anything to compare the return to.
+    ErrorFunc: Seen: "HRESULT", "GetLastError", "errno", "NTSTATUS".
+
+	-->
+	<!-- 
+		Each ApiMonitor can contain multiple interface blocks
+		An Interface can contain Api blocks.
+		<Interface 
+			Name="IDirectInput8A" 
+			Id="{bf798030-483a-4da2-aa99-5d64ed369700}" 
+			BaseInterface="IUnknown" 
+			OnlineHelp="MSDN" 
+			ErrorFunc="HRESULT" 
+			Category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Input/DirectInput"
+		>
+		TIP: interface is mostly used for COM and windows , for custom dll this is not needed
+	-->
+    <Module Name="Advapi32.dll" CallingConvention="STDCALL" ErrorFunc="GetLastError" OnlineHelp="MSDN">
+
+        <!-- Variables -->
+        <Variable Name="TCHAR [HW_PROFILE_GUIDLEN]" Type="Array" Base="TCHAR" Count="39" />
+        <Variable Name="WCHAR [WCT_OBJNAME_LENGTH]" Type="Array" Base="WCHAR" Count="128" />
+
+        <!-- [REG_ERROR] -->
+        <Variable Name="[REG_ERROR]" Type="Alias" Base="[ERROR_CODE]">
+            <Display Name="LONG" />
+        </Variable>
+
+
+
+        <!-- Registry -->
+        <Category Name="System Services/Windows System Information/Registry" />
+        <Api Name="RegCloseKey">
+            <Param Type="HKEY" Name="hKey" />
+            <Return Type="[REG_ERROR]" />
+        </Api>
+        <Api Name="RegConnectRegistry" BothCharset="True">
+            <Param Type="LPCTSTR" Name="lpMachineName" />
+            <Param Type="HKEY" Name="hKey" />
+            <Param Type="PHKEY" Name="phkResult" />
+            <Return Type="[REG_ERROR]" />
+        </Api>
+    </Module>
+</ApiMonitor>
